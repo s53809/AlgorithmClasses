@@ -26,10 +26,7 @@ namespace selection_sort_CSharp
                 int box = x[i];
                 for (j = i - 1; j >= 0; j--)
                 {
-                    if (box > x[j])
-                    {
-                        break;
-                    }
+                    if (box > x[j]) break;
                     x[j + 1] = x[j];
                 }
                 x[j + 1] = box;
