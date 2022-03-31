@@ -37,8 +37,6 @@ int main() {
 				x[j + D] = x[j];
 			}
 			x[j + D] = box;
-			cout << D << ": ";
-			print();
 		}
 	}
 	cout << "Á¤·Ä ÈÄ : ";
