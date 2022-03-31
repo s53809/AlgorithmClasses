@@ -14,7 +14,7 @@ namespace selection_sort_CSharp
         }
         static void Main(string[] args)
         {
-            int[] x = { 2, 5, 1, 4, 6, 7, 8, 3, 9, 10 };
+            int[] x = { 15, 12, 5, 16, 3 };
 
             int i, j;
 
