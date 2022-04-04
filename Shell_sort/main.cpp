@@ -28,7 +28,7 @@ int main() {
 	cout << "Á¤·Ä Àü : ";
 	print();
 	while (D != 1) {
-		if (D % 2 == 1) D = D / 2 + 1;
+		if (D % 2 == 0) D = D / 2 + 1;
 		else D = D / 2;
 		for (i = D; i < N; i++) {
 			int box = x[i];
