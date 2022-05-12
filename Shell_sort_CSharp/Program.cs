@@ -14,7 +14,7 @@ namespace Shell_sort_CSharp
         }
         static void Main(string[] args)
         {
-            int[] x = { 30, 50, 7, 40, 88, 15, 44, 55, 22, 33, 77, 99, 11, 66, 1, 85 };
+            int[] x = { 10, 8, 6, 20, 4, 3, 22, 1, 0, 15, 16 };
 
             int i, j;
 
@@ -25,7 +25,7 @@ namespace Shell_sort_CSharp
 
             while (D != 1)
             {
-                if (D % 2 == 0) D = D / 2 + 1;
+                if (D % 2 != 0) D = D / 2 + 1;
                 else D = D / 2;
                 for (i = D; i < x.Length; i++)
                 {
@@ -37,6 +37,8 @@ namespace Shell_sort_CSharp
                     }
                     x[j + D] = box;
                 }
+                Console.Write(D + " | ");
+                print(x);
             }
 
             Console.Write("정렬 후: ");
