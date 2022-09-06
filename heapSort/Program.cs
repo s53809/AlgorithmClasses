@@ -48,10 +48,37 @@ namespace heapSort
 
         public int Insert(int data)
         {
+            if(this.heapType == HeapType.MAX_HEAP_TYPE)
+            {
+                return MaxInsert(data);
+            }
+            else
+            {
+                return MinInsert(data);
+            }
+        }
+
+        public int MaxInsert(int data)
+        {
             int i = this.count;
             this.count++;
 
-            while(i > 0 && data > this.array[Parent(i)])
+            while (i > 0 && data > this.array[Parent(i)])
+            {
+                this.array[i] = this.array[Parent(i)];
+                i = Parent(i);
+            }
+
+            this.array[i] = data;
+            return i;
+        }
+
+        public int MinInsert(int data)
+        {
+            int i = this.count;
+            this.count++;
+
+            while (i > 0 && data < this.array[Parent(i)])
             {
                 this.array[i] = this.array[Parent(i)];
                 i = Parent(i);
@@ -63,12 +90,13 @@ namespace heapSort
 
         public int DeleteMax()
         {
-            if (this.count == 0 && this.heapType != HeapType.MAX_HEAP_TYPE) return -1;
+            if (this.count == 0) return -1;
 
             int data = this.array[0];
             this.array[0] = this.array[this.count - 1];
             this.count--;
-            PercolateDown(0);
+            if (this.heapType != HeapType.MAX_HEAP_TYPE) PercolateDown(0);
+            else MinPercolateDown(0);
             return data;
         }
 
@@ -90,8 +118,31 @@ namespace heapSort
                 int temp = this.array[index];
                 this.array[index] = this.array[max];
                 this.array[max] = temp;
-
                 PercolateDown(max);
+            }
+            return max;
+        }
+
+        public int MinPercolateDown(int index)
+        {
+            if (this.count <= index) return -1;
+
+            int max = index;
+            int left = LeftChild(index);
+            int right = RightChild(index);
+
+            if (left != -1 && this.array[max] > this.array[left])
+                max = left;
+            if (right != -1 && this.array[max] > this.array[right])
+                max = right;
+
+            if (max != index)
+            {
+                int temp = this.array[index];
+                this.array[index] = this.array[max];
+                this.array[max] = temp;
+
+                MinPercolateDown(max);
             }
             return max;
         }
@@ -136,28 +187,38 @@ namespace heapSort
         static void Main(string[] args)
         {
             Heap heap = new Heap(10, HeapType.MAX_HEAP_TYPE);
+            Heap minHeap = new Heap(10, HeapType.MIN_HEAP_TYPE);
 
             Random rand = new Random();
+            Random rand2 = new Random();
 
             for(int i = 0; i < 10; i++)
             {
                 int data = rand.Next(1, 101);
+                int data2 = rand.Next(1, 101);
                 heap.Insert(data);
+                minHeap.Insert(data2);
             }
 
             Console.Write("\n정렬 전 힙 데이터");
             heap.Print();
+            minHeap.Print();
 
             HeapSort heapSort = new HeapSort(heap);
+            HeapSort heapSort2 = new HeapSort(minHeap);
             int[] result = heapSort.AscendingSort();
+            int[] result2 = heapSort2.AscendingSort();
+
             Console.WriteLine("\n힙 정렬 결과");
             foreach (int data in result)
             {
                 Console.Write("{0} ", data);
             }
-
-            Console.Write("\n\n정렬 후 힙 데이터");
-            heap.Print();
+            Console.WriteLine();
+            foreach (int data in result2)
+            {
+                Console.Write("{0} ", data);
+            }
         }
     }
 }
