@@ -7,7 +7,7 @@ namespace BFS
     {
         const Int32 v_count = 6;
 
-        Int32[,] adj = new Int32[6, 6]
+        Int32[,] adj = new Int32[v_count, v_count]
         {
             { 0, 1, 0, 1, 0, 0 },
             { 1, 0, 1, 1, 0, 0 },
