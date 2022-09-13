@@ -6,8 +6,18 @@ namespace BFS
     class Graph
     {
         const Int32 v_count = 6;
+        List<Int32>[] adj = new List<Int32>[]
+        {
+            new List<Int32>{1,3 },
+            new List<Int32>{0,2,3 },
+            new List<Int32>{1 },
+            new List<Int32>{0,1,4 },
+            new List<Int32>{3,5 },
+            new List<Int32>{4 }
+        };
 
-        Int32[,] adj = new Int32[v_count, v_count]
+ 
+        /*Int32[,] adj = new Int32[v_count, v_count]
         {
             { 0, 1, 0, 1, 0, 0 },
             { 1, 0, 1, 1, 0, 0 },
@@ -15,7 +25,7 @@ namespace BFS
             { 1, 1, 0, 0, 1, 0 },
             { 0, 0, 0, 1, 0, 1 },
             { 0, 0, 0, 0, 1, 0 }
-        };
+        };*/
 
         public void BFS(Int32 start)
         {
@@ -31,12 +41,12 @@ namespace BFS
                 Int32 dist = qu.Dequeue();
                 Console.Write(dist.ToString() + "->");
 
-                for(Int32 next = 0; next < v_count; next++)
+                foreach(Int32 next in adj[dist])
                 {
-                    if (adj[dist, next] == 1 && !visited[next])
+                    if (!visited[next])
                     {
-                        qu.Enqueue(next);
                         visited[next] = true;
+                        qu.Enqueue(next);
                     }
                 }
             }
